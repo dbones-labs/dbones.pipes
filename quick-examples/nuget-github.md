@@ -21,7 +21,7 @@ dotnet nuget add source https://nuget.pkg.github.com/dbones-labs/index.json -n g
 Install the required packages
 
 ```sh
-dotnet add PROJECT package Pipes
+dotnet add PROJECT package Dbones.Pipes
 ```
 
 All the `pipes` package versions are listed here: [![Nuget](https://img.shields.io/badge/nuget-pipes-blue)](https://github.com/orgs/dbones-labs/packages?repo_name=pipes)
