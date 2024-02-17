@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>Pipes</PackageId>
-    <PackageTitle>Pipes</PackageTitle>
+    <PackageId>Dbones.Pipes</PackageId>
+    <PackageTitle>Dbones.Pipes</PackageTitle>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Middleware Pipeline</PackageTags>
     <license>http://opensource.org/licenses/Apache-2.0</license>
