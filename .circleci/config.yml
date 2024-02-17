@@ -127,7 +127,8 @@ jobs:
           ls
           
           dotnet nuget push "*.nupkg" -k ${GH_PKG} -s https://nuget.pkg.github.com/dbones-labs/index.json
-                  
+          dotnet nuget push "*.nupkg" -k ${nuget_pkg}
+
 workflows:
   version: 2
   build_and_publish:
