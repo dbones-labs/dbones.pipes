@@ -1,6 +1,6 @@
 # pipes
 
-[![release](https://img.shields.io/github/v/release/dbones-labs/dbones.pipes?logo=nuget)](https://github.com/dbones-labs/dbones.pipes/releases) [![Nuget](https://img.shields.io/badge/nuget-pipes-blue)]([https://github.com/orgs/dbones-labs/packages?repo_name=pipes](https://github.com/dbones-labs/dbones.pipes/pkgs/nuget/Dbones.Pipes)
+[![release](https://img.shields.io/github/v/release/dbones-labs/dbones.pipes?logo=nuget)](https://github.com/dbones-labs/dbones.pipes/releases) [![Nuget](https://img.shields.io/badge/nuget-pipes-blue)](https://github.com/orgs/dbones-labs/packages?repo_name=dbones.pipes)
 [![docs](https://img.shields.io/badge/docs-pipes-blue)](https://dbones-labs.github.io/dbones.pipes/)
 
 [![dbones-labs](https://circleci.com/gh/dbones-labs/dbones.pipes.svg?style=shield)](https://app.circleci.com/pipelines/github/dbones-labs/dbones.pipes) 
