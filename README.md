@@ -1,11 +1,11 @@
 # pipes
 
-[![release](https://img.shields.io/github/v/release/dbones-labs/pipes?logo=nuget)](https://github.com/dbones-labs/pipes/releases) [![Nuget](https://img.shields.io/badge/nuget-pipes-blue)](https://github.com/orgs/dbones-labs/packages?repo_name=pipes)
-[![docs](https://img.shields.io/badge/docs-pipes-blue)](https://dbones-labs.github.io/pipes/)
+[![release](https://img.shields.io/github/v/release/dbones-labs/dbones.pipes?logo=nuget)](https://github.com/dbones-labs/dbones.pipes/releases) [![Nuget](https://img.shields.io/badge/nuget-pipes-blue)](https://github.com/orgs/dbones-labs/packages?repo_name=pipes)
+[![docs](https://img.shields.io/badge/docs-pipes-blue)](https://dbones-labs.github.io/dbones.pipes/)
 
-[![dbones-labs](https://circleci.com/gh/dbones-labs/pipes.svg?style=shield)](https://app.circleci.com/pipelines/github/dbones-labs/pipes) 
-[![codecov](https://codecov.io/gh/dbones-labs/pipes/branch/master/graph/badge.svg?token=0AE8TL5PR3)](undefined)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/fd426474c7b84cd7b8cd2f47d9d8eeb9)](https://www.codacy.com/gh/dbones-labs/pipes/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dbones-labs/pipes&amp;utm_campaign=Badge_Grade)
+[![dbones-labs](https://circleci.com/gh/dbones-labs/dbones.pipes.svg?style=shield)](https://app.circleci.com/pipelines/github/dbones-labs/dbones.pipes) 
+[![codecov](https://codecov.io/gh/dbones-labs/dbones.pipes/branch/master/graph/badge.svg?token=0AE8TL5PR3)](undefined)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/fd426474c7b84cd7b8cd2f47d9d8eeb9)](https://www.codacy.com/gh/dbones-labs/dbones.pipes/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dbones-labs/dbones.pipes&amp;utm_campaign=Badge_Grade)
 
 
 Pipes allows you to implement middleware
@@ -29,7 +29,7 @@ you can find all packages here:
 
 ## Major releases
 
-[![Nuget](https://img.shields.io/github/v/release/dbones-labs/pipes?logo=nuget)](https://github.com/dbones-labs/pipes/releases)
+[![Nuget](https://img.shields.io/github/v/release/dbones-labs/dbones.pipes?logo=nuget)](https://github.com/dbones-labs/dbones.pipes/releases)
 
 We use Milestones to represent an notable release
 
@@ -44,7 +44,7 @@ We use a variant of Githubflow, so all feature branches have their own pre-relea
 
 check out our docs for examples and more information
 
-[![docs](https://img.shields.io/badge/docs-pipes-blue)](https://dbones-labs.github.io/pipes/)
+[![docs](https://img.shields.io/badge/docs-pipes-blue)](https://dbones-labs.github.io/dbones.pipes/)
 
 ## Use of this library
 
