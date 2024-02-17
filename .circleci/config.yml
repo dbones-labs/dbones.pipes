@@ -126,8 +126,7 @@ jobs:
           cd nupkgs
           ls
           
-          dotnet nuget add source https://nuget.pkg.github.com/dbones-labs/index.json -n github -u dbones -p ${GH_TOKEN} --store-password-in-clear-text
-          dotnet nuget push "*.nupkg" --source "github"
+          dotnet nuget push "*.nupkg" --api-key ${GH_TOKEN} --source https://nuget.pkg.github.com/dbones-labs/index.json
                   
 workflows:
   version: 2
