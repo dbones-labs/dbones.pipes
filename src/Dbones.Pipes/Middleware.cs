@@ -45,10 +45,10 @@
     /// <typeparam name="TContext">the type which the middleware is for</typeparam>
     public class ScopedMiddleware<TContext> : Middleware<TContext>
     {
-        public override Task Execute(IServiceProvider scope, TContext context)
+        public override async Task Execute(IServiceProvider scope, TContext context)
         {
             using var childScope = scope.CreateScope();
-            return base.Execute(childScope.ServiceProvider, context);
+            await base.Execute(childScope.ServiceProvider, context);
         }
     }
 }
