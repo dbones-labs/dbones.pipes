@@ -1,7 +1,7 @@
 # Dispatcher and middleware benchmarks
 
 Run from the repository root with the .NET 8 SDK or newer. These projects are
-separate from `src/Pipes.sln` so the existing .NET 6 build and published package
+separate from `src/Pipes.sln` so the solution build and published package
 do not acquire benchmark dependencies.
 
 ```sh

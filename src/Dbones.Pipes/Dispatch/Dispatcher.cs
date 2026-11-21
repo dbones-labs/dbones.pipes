@@ -25,7 +25,7 @@ public sealed class Dispatcher : IDispatcher
     /// <inheritdoc />
     public Task<TResult> Send<TResult>(IRequest<TResult> request, CancellationToken ct = default)
     {
-        ArgumentNullException.ThrowIfNull(request);
+        if (request is null) throw new ArgumentNullException(nameof(request));
         var runner = (Runner<TResult>)Runners.GetOrAdd((request.GetType(), typeof(TResult)), key =>
             Activator.CreateInstance(typeof(Runner<,>).MakeGenericType(key.Request, key.Result))!);
         return runner.Run(this, request, ct);

@@ -20,8 +20,8 @@ public static class DispatchExtensions
     /// <exception cref="ArgumentNullException">The collection or assembly array is null.</exception>
     public static IServiceCollection AddHandlersFrom(this IServiceCollection services, params Assembly[] assemblies)
     {
-        ArgumentNullException.ThrowIfNull(services);
-        ArgumentNullException.ThrowIfNull(assemblies);
+        if (services is null) throw new ArgumentNullException(nameof(services));
+        if (assemblies is null) throw new ArgumentNullException(nameof(assemblies));
         foreach (var type in assemblies.Distinct().SelectMany(a => a.ExportedTypes)
                      .Where(t => t.IsClass && !t.IsAbstract && !t.ContainsGenericParameters))
         {
