@@ -9,7 +9,8 @@ jobs:
       - run:
           name: Use HTTPS for GitHub checkout
           command: git config --global url."https://github.com/".insteadOf "git@github.com:"
-      - checkout
+      - checkout:
+          method: full
       - run:
           name: version
           command: |
