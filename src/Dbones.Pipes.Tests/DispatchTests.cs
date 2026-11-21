@@ -2,12 +2,13 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Dispatch;
+using Dbones.Pipes.Dispatch;
 using Machine.Specifications;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Dbones.Pipes.Tests;
 
+/// <summary>Verifies reflection registration, dispatch results and caller-scope behavior.</summary>
 public class DispatchTests
 {
     It registers_concrete_handlers_once_with_scoped_lifetime = () =>
@@ -62,25 +63,41 @@ public class DispatchTests
     static void Run(Func<Task> test) => test().GetAwaiter().GetResult();
     internal static void Check(bool condition) { if (!condition) throw new Exception("Assertion failed"); }
 
+    /// <summary>Provides an integer-result request for dispatch tests.</summary>
     public sealed class Request : IRequest<int> { }
+    /// <summary>Records scope-local handler and action observations.</summary>
     public sealed class State
     {
-        public int Calls, Observations, Value;
+        /// <summary>Counts handler and service calls.</summary>
+        public int Calls;
+        /// <summary>Counts invocation action executions.</summary>
+        public int Observations;
+        /// <summary>Stores the last service-call input.</summary>
+        public int Value;
+        /// <summary>Stores the cancellation token observed by the handler.</summary>
         public CancellationToken Token;
+        /// <summary>Stores the most recently observed operation description.</summary>
         public string Operation;
     }
+    /// <summary>Provides an abstract handler that assembly scanning must exclude.</summary>
     public abstract class AbstractHandler : IHandler<Request, int>
     {
+        /// <summary>Processes one request and returns its result.</summary>
         public abstract Task<int> Handle(Request request, CancellationToken ct);
     }
+    /// <summary>Provides an open generic handler that assembly scanning must exclude.</summary>
     public class OpenHandler<T> : IHandler<Request, int>
     {
+        /// <summary>Processes one request and returns its result.</summary>
         public Task<int> Handle(Request request, CancellationToken ct) => Task.FromResult(0);
     }
+    /// <summary>Counts a request execution and returns the common benchmark result.</summary>
     public sealed class Handler : IHandler<Request, int>
     {
         readonly State state;
+        /// <summary>Creates the resources for this Handler instance.</summary>
         public Handler(State state) => this.state = state;
+        /// <summary>Processes one request and returns its result.</summary>
         public Task<int> Handle(Request request, CancellationToken ct)
         {
             Check(state.Observations == state.Calls + 1);
@@ -89,17 +106,24 @@ public class DispatchTests
             return Task.FromResult(42);
         }
     }
+    /// <summary>Provides result-returning and resultless service calls for dispatch tests.</summary>
     public sealed class Service
     {
         readonly State state;
+        /// <summary>Creates the resources for this Service instance.</summary>
         public Service(State state) => this.state = state;
+        /// <summary>Counts a service call and returns twice the input.</summary>
         public Task<int> Double(int input) { state.Calls++; return Task.FromResult(input * 2); }
+        /// <summary>Counts a service call and records the input.</summary>
         public Task Store(int input) { state.Calls++; state.Value = input; return Task.CompletedTask; }
     }
+    /// <summary>Records invocation metadata before forwarding to the next action.</summary>
     public sealed class Observe<TInput, TResult> : IAction<Invocation<TInput, TResult>>
     {
         readonly State state;
+        /// <summary>Creates the resources for this Observe instance.</summary>
         public Observe(State state) => this.state = state;
+        /// <summary>Counts this action execution and awaits the next stage.</summary>
         public async Task Execute(Invocation<TInput, TResult> inv, Next<Invocation<TInput, TResult>> next)
         {
             state.Observations++;
@@ -107,7 +131,9 @@ public class DispatchTests
             await next(inv);
         }
     }
+    /// <summary>Provides a request with two result contracts to test runner caching.</summary>
     public sealed class MultiRequest : IRequest<int>, IRequest<string> { }
+    /// <summary>Handles both result contracts of the same request type.</summary>
     public sealed class MultiHandler : IHandler<MultiRequest, int>, IHandler<MultiRequest, string>
     {
         Task<int> IHandler<MultiRequest, int>.Handle(MultiRequest r, CancellationToken ct) => Task.FromResult(1);
@@ -115,6 +141,7 @@ public class DispatchTests
     }
 }
 
+/// <summary>Verifies child-scope lifetime across asynchronous completion and failure.</summary>
 public class ScopedMiddlewareTests
 {
     It keeps_the_child_scope_alive_until_async_execution_completes = () => Verify(false).GetAwaiter().GetResult();
@@ -137,22 +164,33 @@ public class ScopedMiddlewareTests
         catch (InvalidOperationException) { DispatchTests.Check(fail); }
         DispatchTests.Check(context.Resource.Disposed);
     }
+    /// <summary>Coordinates a suspended middleware action and its expected outcome.</summary>
     public sealed class Context
     {
+        /// <summary>Indicates whether the action should fail after resuming.</summary>
         public bool Fail;
+        /// <summary>Stores the dependency captured by the action.</summary>
         public Resource Resource;
+        /// <summary>Executes the operation.</summary>
         public TaskCompletionSource<bool> Started = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        /// <summary>Executes the operation.</summary>
         public TaskCompletionSource<bool> Resume = new(TaskCreationOptions.RunContinuationsAsynchronously);
     }
+    /// <summary>Records disposal of a scope-owned dependency.</summary>
     public sealed class Resource : IDisposable
     {
+        /// <summary>Indicates whether the resource has been disposed.</summary>
         public bool Disposed;
+        /// <summary>Releases owned resources and records disposal where applicable.</summary>
         public void Dispose() => Disposed = true;
     }
+    /// <summary>Suspends execution to verify that its scoped dependency remains alive.</summary>
     public sealed class AsyncAction : IAction<Context>
     {
         readonly Resource resource;
+        /// <summary>Creates the resources for this AsyncAction instance.</summary>
         public AsyncAction(Resource resource) => this.resource = resource;
+        /// <summary>Counts this action execution and awaits the next stage.</summary>
         public async Task Execute(Context context, Next<Context> next)
         {
             context.Resource = resource;

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <SpaceGenerateRootAggregator>true</SpaceGenerateRootAggregator>
+  </PropertyGroup>
+  <ItemGroup>
+    <CompilerVisibleProperty Include="SpaceGenerateRootAggregator" />
+    <PackageReference Include="Space.Abstraction" Version="2.3.1" PrivateAssets="all" />
+    <PackageReference Include="Space.DependencyInjection" Version="2.3.1" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Dbones.Pipes/Dbones.Pipes.csproj" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.15.8" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.7" />
+    <PackageReference Include="MediatR" Version="15.0.0" />
+    <PackageReference Include="DispatchR.Mediator" Version="2.3.1" />
+    <ProjectReference Include="../SpaceAdapter/SpaceAdapter.csproj" />
+    <PackageReference Include="Space.Abstraction" Version="2.3.1" ExcludeAssets="analyzers" />
+    <PackageReference Include="Space.DependencyInjection" Version="2.3.1" />
+  </ItemGroup>
+  <!-- Space's analyzer confuses Dispatch.IHandler with its own IHandler.
+       Generation runs in SpaceAdapter; only its runtime is needed here. -->
+  <Target Name="RemoveSpaceAnalyzer" BeforeTargets="CoreCompile">
+    <ItemGroup>
+      <Analyzer Remove="@(Analyzer)" Condition="'%(Analyzer.Filename)' == 'Space.SourceGenerator'" />
+    </ItemGroup>
+  </Target>
+</Project>
