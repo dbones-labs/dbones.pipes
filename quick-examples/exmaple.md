@@ -13,7 +13,7 @@ Note ✏️
 
 We reconmend that this library is used in other libraries (examples: Eventual, ArmChair etc), where you want to expose a way to extend without modification.
 
-If you are looking for a command and query mechanism please look at a project called `MediatR`
+For the built-in command and query dispatcher, see the [dispatcher guide](dispatcher.md). The example below demonstrates the lower-level middleware API.
 
 For now we will show how this works and for you to decide if it can be helpful for you.
 

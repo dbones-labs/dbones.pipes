@@ -14,3 +14,7 @@ For more information about the patten have a look at this article: http://dbones
 ## Show me some Code!
 
 have a look at our Quick Start section, you will see how to setup the skeleton of the project and start using `pipes` 
+
+## Dispatcher
+
+Use the [dispatcher guide](quick-examples/dispatcher.md) for commands, queries and service calls through a shared action pipeline. The guide includes a runnable demo.

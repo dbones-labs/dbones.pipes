@@ -1,0 +1,14 @@
+# .NET build output
+**/bin/
+**/obj/
+.vs/
+BenchmarkDotNet.Artifacts/
+
+# Jekyll build output
+_site/
+.jekyll-cache/
+.sass-cache/
+
+# Feature-branch build directories are not part of the documentation site
+/src/
+/benchmarks/
