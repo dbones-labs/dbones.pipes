@@ -6,7 +6,11 @@ jobs:
     docker:
       - image: dboneslabs/tools-docker-gittools:latest
     steps:
-      - checkout
+      - run:
+          name: Use HTTPS for GitHub checkout
+          command: git config --global url."https://github.com/".insteadOf "git@github.com:"
+      - checkout:
+          method: full
       - run:
           name: version
           command: |
@@ -42,7 +46,7 @@ jobs:
 
   build:
     docker:
-      - image: mcr.microsoft.com/dotnet/sdk:6.0
+      - image: mcr.microsoft.com/dotnet/sdk:10.0
     steps:
       - attach_workspace:
           at: ./
@@ -77,7 +81,7 @@ jobs:
 
   test:
     docker:
-      - image: mcr.microsoft.com/dotnet/sdk:6.0
+      - image: mcr.microsoft.com/dotnet/sdk:10.0
     steps:
       - attach_workspace:
           at: ./
@@ -116,7 +120,7 @@ jobs:
 
   publish:
     docker:
-      - image: mcr.microsoft.com/dotnet/sdk:6.0
+      - image: mcr.microsoft.com/dotnet/sdk:10.0
     steps:
       - attach_workspace:
           at: ./
@@ -150,7 +154,7 @@ workflows:
             - test
           filters:
             branches:
-              only: master
+              only: main
       - publish:
           context: build-ctx
           requires:
